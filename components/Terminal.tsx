@@ -51,7 +51,7 @@ export default function Terminal({ userId }: TerminalProps) {
 ║     ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚████║██║  ██║    ║
 ║     ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝    ║
 ║                                                               ║
-║           Linux Command Learning Platform v2.0                ║
+║           Linux Command Learning Platform v0.0.1              ║
 ║               [CLASSIFIED SYSTEM ACCESS]                      ║
 ║                                                               ║
 ╚═══════════════════════════════════════════════════════════════╝
@@ -360,7 +360,7 @@ Type '!hint' for a hint | Type '!skip' to skip
             <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
             <div className="w-3 h-3 rounded-full bg-green-500"></div>
           </div>
-          <span className="text-green-400 text-sm">TERMINAL v2.0 - SECURE CONNECTION ESTABLISHED</span>
+          <span className="text-green-400 text-sm">TERMINAL v0.0.1 - SECURE CONNECTION ESTABLISHED</span>
         </div>
         <div className="flex items-center gap-6 text-xs">
           <div className="flex items-center gap-2">
