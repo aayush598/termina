@@ -7,10 +7,12 @@ import { Challenge, builtInChallenges, validateCommand, getNextChallenge } from 
 import { getChallengesByCategory } from '@/lib/challenges';
 import { challengeCategories } from '@/lib/challenges';
 import TerminalNavbar from './TerminalNavbar';
+import TerminalWelcome from './TerminalWelcome';
+
 
 interface TerminalLine {
   type: 'input' | 'output' | 'error' | 'success' | 'info' | 'challenge';
-  content: string;
+  content: string | React.ReactNode;
   timestamp: Date;
 }
 
@@ -54,29 +56,7 @@ export default function Terminal({ userId }: TerminalProps) {
     initializedRef.current = true;
     addLine({
       type: 'info',
-      content: `
-        ╔═══════════════════════════════════════════════════════════════╗
-        ║                                                               ║
-        ║  ████████╗███████╗██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗     ║
-        ║  ╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██║████╗  ██║██╔══██╗    ║
-        ║     ██║   █████╗  ██████╔╝██╔████╔██║██║██╔██╗ ██║███████║    ║
-        ║     ██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║██║██║╚██╗██║██╔══██║    ║
-        ║     ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚████║██║  ██║    ║
-        ║     ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝    ║
-        ║                                                               ║
-        ║           Linux Command Learning Platform v0.0.1              ║
-        ║               [CLASSIFIED SYSTEM ACCESS]                      ║
-        ║                                                               ║
-        ╚═══════════════════════════════════════════════════════════════╝
-
-        [SYSTEM INITIALIZED] Welcome, operative.
-        Type 'help' for available commands
-        Type '!tutorial' to begin your training
-
-        Tip: You can explore different challenge categories!
-        Type '!categories' to view all available ones.
-        Then switch using: !category <name>
-        `,
+      content: <TerminalWelcome />,
       timestamp: new Date(),
     });
 
