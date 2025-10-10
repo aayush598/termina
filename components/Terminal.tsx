@@ -23,7 +23,7 @@ export default function Terminal({ userId }: TerminalProps) {
   const [input, setInput] = useState('');
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
-  const [currentChallenge, setCurrentChallenge] = useState<Challenge | null>(builtInChallenges[0]);
+  const [currentChallenge, setCurrentChallenge] = useState<Challenge | null>(null);
   const [hintIndex, setHintIndex] = useState(0);
   const [startTime, setStartTime] = useState<Date | null>(null);
   const [commandStartTime, setCommandStartTime] = useState<Date | null>(null);
@@ -49,7 +49,7 @@ export default function Terminal({ userId }: TerminalProps) {
 
 
   useEffect(() => {
-    if (initializedRef.current) return; // Skip if already initialized
+    if (initializedRef.current) return;
     initializedRef.current = true;
     addLine({
       type: 'info',
@@ -79,13 +79,8 @@ export default function Terminal({ userId }: TerminalProps) {
       timestamp: new Date(),
     });
 
-    if (currentChallenge) {
-      displayChallenge(currentChallenge);
-      setStartTime(new Date());
-    }
-
     inputRef.current?.focus();
-  }, [currentChallenge]);
+  }, []);
 
   useEffect(() => {
     if (terminalRef.current) {
@@ -269,8 +264,9 @@ export default function Terminal({ userId }: TerminalProps) {
 
   // ✅ Start tutorial
   if (cmd === '!tutorial') {
-    setCurrentChallenge(builtInChallenges[0]);
-    displayChallenge(builtInChallenges[0]);
+    const firstChallenge = builtInChallenges[0];
+    setCurrentChallenge(firstChallenge);
+    displayChallenge(firstChallenge);
     setStartTime(new Date());
     return true;
   }
