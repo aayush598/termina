@@ -6,6 +6,7 @@ import { executeCommand, CommandResult } from '@/lib/commands';
 import { Challenge, builtInChallenges, validateCommand, getNextChallenge } from '@/lib/challenges';
 import { getChallengesByCategory } from '@/lib/challenges';
 import { challengeCategories } from '@/lib/challenges';
+import TerminalNavbar from './TerminalNavbar';
 
 interface TerminalLine {
   type: 'input' | 'output' | 'error' | 'success' | 'info' | 'challenge';
@@ -481,30 +482,12 @@ export default function Terminal({ userId }: TerminalProps) {
 
   return (
     <div className="h-screen w-full bg-black text-green-400 font-mono flex flex-col overflow-hidden">
-      <div className="flex-none bg-gray-900 border-b border-green-500/30 px-4 py-2 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <div className="flex gap-2">
-            <div className="w-3 h-3 rounded-full bg-red-500"></div>
-            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <div className="w-3 h-3 rounded-full bg-green-500"></div>
-          </div>
-          <span className="text-green-400 text-sm">TERMINAL v0.0.1 - [{category.toUpperCase()} MODE]</span>
-        </div>
-        <div className="flex items-center gap-6 text-xs">
-          <div className="flex items-center gap-2">
-            <span className="text-green-500">●</span>
-            <span>LEVEL {userLevel}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-yellow-500">⚡</span>
-            <span>{userXP} XP</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-blue-400">🎯</span>
-            <span>{completedChallenges.size}/{builtInChallenges.length}</span>
-          </div>
-        </div>
-      </div>
+      <TerminalNavbar
+        category={category}
+        userLevel={userLevel}
+        userXP={userXP}
+        completedChallenges={completedChallenges}
+      />
 
       <div
         ref={terminalRef}
