@@ -78,7 +78,7 @@ export default function Terminal({ userId }: TerminalProps) {
       type: 'challenge',
       content: `
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        🎯 CHALLENGE ${challenge.orderIndex}: ${challenge.title}
+        CHALLENGE ${challenge.orderIndex}: ${challenge.title}
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
         Difficulty: ${challenge.difficulty.toUpperCase()} | Level: ${challenge.level} | XP: ${challenge.xpReward}
 
@@ -97,7 +97,7 @@ export default function Terminal({ userId }: TerminalProps) {
     addLine({
       type: 'info',
       content: `
-        📚 AVAILABLE CATEGORIES
+        AVAILABLE CATEGORIES
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
         ${available.map(cat => `- ${cat}`).join('\n\t\t')}
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -127,7 +127,7 @@ export default function Terminal({ userId }: TerminalProps) {
       addLine({
         type: 'info',
         content: `
-          📂 CATEGORY COMMAND HELP
+          CATEGORY COMMAND HELP
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
           Use this command to switch between different sets of challenges.
 
@@ -159,7 +159,7 @@ export default function Terminal({ userId }: TerminalProps) {
     setCategory(chosen);
     addLine({
       type: 'info',
-      content: `📂 Switched to category: ${chosen.toUpperCase()}\nLoading challenges...`,
+      content: `Switched to category: ${chosen.toUpperCase()}\nLoading challenges...`,
       timestamp: new Date(),
     });
 
@@ -171,7 +171,7 @@ export default function Terminal({ userId }: TerminalProps) {
 
     addLine({
       type: 'info',
-      content: `💡 Type '!hint' for help or '!skip' to move to the next challenge.`,
+      content: `Type '!hint' for help or '!skip' to move to the next challenge.`,
       timestamp: new Date(),
     });
 
@@ -192,13 +192,13 @@ export default function Terminal({ userId }: TerminalProps) {
     if (hintIndex >= currentChallenge.hints.length) {
       addLine({
         type: 'info',
-        content: `💡 No more hints available. Expected commands: ${currentChallenge.expectedCommands.join(' or ')}`,
+        content: `No more hints available. Expected commands: ${currentChallenge.expectedCommands.join(' or ')}`,
         timestamp: new Date(),
       });
     } else {
       addLine({
         type: 'info',
-        content: `💡 HINT ${hintIndex + 1}/${currentChallenge.hints.length}: ${currentChallenge.hints[hintIndex]}`,
+        content: `HINT ${hintIndex + 1}/${currentChallenge.hints.length}: ${currentChallenge.hints[hintIndex]}`,
         timestamp: new Date(),
       });
       setHintIndex(prev => prev + 1);
@@ -224,7 +224,7 @@ export default function Terminal({ userId }: TerminalProps) {
     if (nextChallenge) {
       addLine({
         type: 'info',
-        content: '⏭️  Challenge skipped. Moving to next challenge...',
+        content: 'Challenge skipped. Moving to next challenge...',
         timestamp: new Date(),
       });
       setCurrentChallenge(nextChallenge);
@@ -233,7 +233,7 @@ export default function Terminal({ userId }: TerminalProps) {
     } else {
       addLine({
         type: 'success',
-        content: `🎉 You’ve reached the end of available challenges in the [${category.toUpperCase()}] category!`,
+        content: `You’ve reached the end of available challenges in the [${category.toUpperCase()}] category!`,
         timestamp: new Date(),
       });
       setCurrentChallenge(null);
@@ -353,7 +353,7 @@ export default function Terminal({ userId }: TerminalProps) {
     if (result.bestPractice) {
       addLine({
         type: 'info',
-        content: `💡 ${result.bestPractice}`,
+        content: `${result.bestPractice}`,
         timestamp: new Date(),
       });
     }
@@ -373,7 +373,7 @@ export default function Terminal({ userId }: TerminalProps) {
     addLine({
       type: 'success',
       content: `
-        ✅ CHALLENGE COMPLETED!
+        CHALLENGE COMPLETED!
         +${earnedXP} XP | Time: ${timeSpent.toFixed(1)}s | Speed: ${typingSpeed.toFixed(0)} CPM
         `,
       timestamp: new Date(),
