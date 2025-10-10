@@ -1,0 +1,244 @@
+[
+  {
+    "id": "challenge-1",
+    "title": "Getting Started",
+    "description": "Learn basic navigation commands",
+    "difficulty": "beginner",
+    "level": 1,
+    "scenario": "You just logged into a Linux system. First, let's find out where you are. Use the appropriate command to print your current working directory.",
+    "expectedCommands": ["pwd"],
+    "hints": [
+      "The command you need stands for \"Print Working Directory\"",
+      "It's a 3-letter command that starts with \"p\"",
+      "Try typing: pwd"
+    ],
+    "xpReward": 10,
+    "orderIndex": 1
+  },
+  {
+    "id": "challenge-2",
+    "title": "Exploring Directories",
+    "description": "Learn to list directory contents",
+    "difficulty": "beginner",
+    "level": 1,
+    "scenario": "Now that you know where you are, let's see what files and directories are in your current location. List the contents of the current directory.",
+    "expectedCommands": ["ls"],
+    "hints": [
+      "The command is short for \"list\"",
+      "It's only 2 letters",
+      "Try typing: ls"
+    ],
+    "xpReward": 10,
+    "orderIndex": 2
+  },
+  {
+    "id": "challenge-3",
+    "title": "Detailed Listing",
+    "description": "Learn to use command options",
+    "difficulty": "beginner",
+    "level": 1,
+    "scenario": "Great! Now let's get more details about the files. Use the long listing format to see file permissions, sizes, and modification dates.",
+    "expectedCommands": ["ls -l"],
+    "hints": [
+      "You need to add an option flag to the ls command",
+      "The flag for long format is \"-l\"",
+      "Try typing: ls -l"
+    ],
+    "xpReward": 15,
+    "orderIndex": 3
+  },
+  {
+    "id": "challenge-4",
+    "title": "Reading Files",
+    "description": "Display file contents",
+    "difficulty": "beginner",
+    "level": 1,
+    "scenario": "You see a file called \"welcome.txt\" in the directory. Let's read its contents to see what it says.",
+    "expectedCommands": ["cat welcome.txt"],
+    "hints": [
+      "Use the command that concatenates and displays file contents",
+      "The command sounds like a small pet animal",
+      "Try typing: cat welcome.txt"
+    ],
+    "xpReward": 15,
+    "orderIndex": 4
+  },
+  {
+    "id": "challenge-5",
+    "title": "Changing Directories",
+    "description": "Navigate to different directories",
+    "difficulty": "beginner",
+    "level": 1,
+    "scenario": "You notice there's a \"documents\" directory. Let's navigate into it using the change directory command.",
+    "expectedCommands": ["cd documents"],
+    "hints": [
+      "The command stands for \"Change Directory\"",
+      "It's a 2-letter command",
+      "Try typing: cd documents"
+    ],
+    "xpReward": 15,
+    "orderIndex": 5
+  },
+  {
+    "id": "challenge-6",
+    "title": "Creating Directories",
+    "description": "Learn to create new directories",
+    "difficulty": "beginner",
+    "level": 2,
+    "scenario": "You need to organize your work. Create a new directory called \"projects\" in your current location.",
+    "expectedCommands": ["mkdir projects"],
+    "hints": [
+      "The command stands for \"Make Directory\"",
+      "It combines \"mk\" and \"dir\"",
+      "Try typing: mkdir projects"
+    ],
+    "xpReward": 20,
+    "orderIndex": 6
+  },
+  {
+    "id": "challenge-7",
+    "title": "Creating Files",
+    "description": "Create empty files",
+    "difficulty": "beginner",
+    "level": 2,
+    "scenario": "Now let's create a new empty file called \"notes.txt\" in the current directory.",
+    "expectedCommands": ["touch notes.txt"],
+    "hints": [
+      "The command is called \"touch\" because it updates file timestamps",
+      "If the file doesn't exist, it creates it",
+      "Try typing: touch notes.txt"
+    ],
+    "xpReward": 20,
+    "orderIndex": 7
+  },
+  {
+    "id": "challenge-8",
+    "title": "Going Up",
+    "description": "Navigate to parent directories",
+    "difficulty": "beginner",
+    "level": 2,
+    "scenario": "You're currently in the documents directory. Use the change directory command to go up one level to the parent directory.",
+    "expectedCommands": ["cd .."],
+    "hints": [
+      "Two dots (..) represent the parent directory",
+      "Use cd with \"..\" to go up one level",
+      "Try typing: cd .."
+    ],
+    "xpReward": 20,
+    "orderIndex": 8
+  },
+  {
+    "id": "challenge-9",
+    "title": "Removing Files",
+    "description": "Delete files safely",
+    "difficulty": "intermediate",
+    "level": 2,
+    "scenario": "You have a file in documents called \"notes.txt\" that you no longer need. Remove this file using the appropriate command.",
+    "expectedCommands": ["rm documents/notes.txt", "rm ./documents/notes.txt"],
+    "hints": [
+      "The command for removing files starts with \"rm\"",
+      "You need to specify the path to the file",
+      "Try typing: rm documents/notes.txt"
+    ],
+    "xpReward": 25,
+    "orderIndex": 9
+  },
+  {
+    "id": "challenge-10",
+    "title": "Echo Command",
+    "description": "Display text messages",
+    "difficulty": "intermediate",
+    "level": 3,
+    "scenario": "Use the echo command to display the message \"Hello, Linux!\" to the terminal.",
+    "expectedCommands": ["echo Hello, Linux!", "echo \"Hello, Linux!\""],
+    "hints": [
+      "The echo command displays text to the terminal",
+      "You can use quotes around the text",
+      "Try typing: echo \"Hello, Linux!\""
+    ],
+    "xpReward": 25,
+    "orderIndex": 10
+  },
+  {
+    "id": "challenge-11",
+    "title": "Finding Files",
+    "description": "Search for files in the directory",
+    "difficulty": "intermediate",
+    "level": 3,
+    "scenario": "You need to find all .txt files in the current directory. Use the find command with the -name option.",
+    "expectedCommands": ["find . -name \"*.txt\"", "find . -name *.txt"],
+    "hints": [
+      "The find command searches for files",
+      "Use . to search in current directory",
+      "Use -name \"*.txt\" to find all .txt files",
+      "Try typing: find . -name \"*.txt\""
+    ],
+    "xpReward": 30,
+    "orderIndex": 11
+  },
+  {
+    "id": "challenge-12",
+    "title": "Searching Within Files",
+    "description": "Use grep to search for text patterns",
+    "difficulty": "intermediate",
+    "level": 3,
+    "scenario": "Search for the word \"Welcome\" in the welcome.txt file using the grep command.",
+    "expectedCommands": ["grep Welcome welcome.txt", "grep \"Welcome\" welcome.txt"],
+    "hints": [
+      "The grep command searches for patterns in files",
+      "Syntax: grep [PATTERN] [FILE]",
+      "Try typing: grep \"Welcome\" welcome.txt"
+    ],
+    "xpReward": 30,
+    "orderIndex": 12
+  },
+  {
+    "id": "challenge-13",
+    "title": "Absolute Paths",
+    "description": "Navigate using absolute paths",
+    "difficulty": "intermediate",
+    "level": 4,
+    "scenario": "Navigate to the /home/user directory using an absolute path (starting from root).",
+    "expectedCommands": ["cd /home/user"],
+    "hints": [
+      "Absolute paths start with /",
+      "The full path to your home is /home/user",
+      "Try typing: cd /home/user"
+    ],
+    "xpReward": 30,
+    "orderIndex": 13
+  },
+  {
+    "id": "challenge-14",
+    "title": "Multiple Options",
+    "description": "Combine command options",
+    "difficulty": "advanced",
+    "level": 4,
+    "scenario": "List all files (including hidden ones) in the current directory with detailed information. Combine the -a and -l options.",
+    "expectedCommands": ["ls -la", "ls -al", "ls -l -a", "ls -a -l"],
+    "hints": [
+      "You can combine multiple options",
+      "Use both -l (long format) and -a (all files)",
+      "Options can be written as -la or -l -a",
+      "Try typing: ls -la"
+    ],
+    "xpReward": 35,
+    "orderIndex": 14
+  },
+  {
+    "id": "challenge-15",
+    "title": "System Information",
+    "description": "Get user and system information",
+    "difficulty": "advanced",
+    "level": 4,
+    "scenario": "Find out your current username using the whoami command, then check the current date and time.",
+    "expectedCommands": ["whoami", "date"],
+    "hints": [
+      "First use whoami to see your username",
+      "Then use date to see current date and time",
+      "You need to run both commands"
+    ],
+    "xpReward": 35,
+    "orderIndex": 15
+  }
+]

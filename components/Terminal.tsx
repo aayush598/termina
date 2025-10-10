@@ -4,6 +4,8 @@ import { useState, useEffect, useRef, KeyboardEvent } from 'react';
 import { VirtualFileSystem } from '@/lib/vfs';
 import { executeCommand, CommandResult } from '@/lib/commands';
 import { Challenge, builtInChallenges, validateCommand, getNextChallenge } from '@/lib/challenges';
+import { getChallengesByCategory } from '@/lib/challenges';
+import { challengeCategories } from '@/lib/challenges';
 
 interface TerminalLine {
   type: 'input' | 'output' | 'error' | 'success' | 'info' | 'challenge';
@@ -30,6 +32,9 @@ export default function Terminal({ userId }: TerminalProps) {
   const [completedChallenges, setCompletedChallenges] = useState<Set<string>>(new Set());
   const [typingStats, setTypingStats] = useState({ speed: 0, accuracy: 0, totalCommands: 0 });
   const [autoComplete, setAutoComplete] = useState<string[]>([]);
+  const [category, setCategory] = useState('default');
+  const [challenges, setChallenges] = useState<Challenge[]>(getChallengesByCategory('default'));
+
 
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -37,29 +42,40 @@ export default function Terminal({ userId }: TerminalProps) {
   const initializedRef = useRef(false);
 
   useEffect(() => {
+    const selectedChallenges = getChallengesByCategory(category);
+    setChallenges(selectedChallenges);
+    setCurrentChallenge(selectedChallenges[0]);
+  }, [category]);
+
+
+  useEffect(() => {
     if (initializedRef.current) return; // Skip if already initialized
     initializedRef.current = true;
     addLine({
       type: 'info',
       content: `
-╔═══════════════════════════════════════════════════════════════╗
-║                                                               ║
-║  ████████╗███████╗██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗     ║
-║  ╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██║████╗  ██║██╔══██╗    ║
-║     ██║   █████╗  ██████╔╝██╔████╔██║██║██╔██╗ ██║███████║    ║
-║     ██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║██║██║╚██╗██║██╔══██║    ║
-║     ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚████║██║  ██║    ║
-║     ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝    ║
-║                                                               ║
-║           Linux Command Learning Platform v0.0.1              ║
-║               [CLASSIFIED SYSTEM ACCESS]                      ║
-║                                                               ║
-╚═══════════════════════════════════════════════════════════════╝
+        ╔═══════════════════════════════════════════════════════════════╗
+        ║                                                               ║
+        ║  ████████╗███████╗██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗     ║
+        ║  ╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██║████╗  ██║██╔══██╗    ║
+        ║     ██║   █████╗  ██████╔╝██╔████╔██║██║██╔██╗ ██║███████║    ║
+        ║     ██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║██║██║╚██╗██║██╔══██║    ║
+        ║     ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚████║██║  ██║    ║
+        ║     ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝    ║
+        ║                                                               ║
+        ║           Linux Command Learning Platform v0.0.1              ║
+        ║               [CLASSIFIED SYSTEM ACCESS]                      ║
+        ║                                                               ║
+        ╚═══════════════════════════════════════════════════════════════╝
 
-[SYSTEM INITIALIZED] Welcome, operative.
-Type 'help' for available commands
-Type '!tutorial' to begin your training
-`,
+        [SYSTEM INITIALIZED] Welcome, operative.
+        Type 'help' for available commands
+        Type '!tutorial' to begin your training
+
+        Tip: You can explore different challenge categories!
+        Type '!categories' to view all available ones.
+        Then switch using: !category <name>
+        `,
       timestamp: new Date(),
     });
 
@@ -85,107 +101,221 @@ Type '!tutorial' to begin your training
     addLine({
       type: 'challenge',
       content: `
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🎯 CHALLENGE ${challenge.orderIndex}: ${challenge.title}
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Difficulty: ${challenge.difficulty.toUpperCase()} | Level: ${challenge.level} | XP: ${challenge.xpReward}
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        🎯 CHALLENGE ${challenge.orderIndex}: ${challenge.title}
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        Difficulty: ${challenge.difficulty.toUpperCase()} | Level: ${challenge.level} | XP: ${challenge.xpReward}
 
-${challenge.scenario}
+        ${challenge.scenario}
 
-Type '!hint' for a hint | Type '!skip' to skip
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-`,
+        Type '!hint' for a hint | Type '!skip' to skip
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        `,
       timestamp: new Date(),
     });
     setHintIndex(0);
   };
 
+  const showCategoryList = () => {
+    const available = Object.keys(challengeCategories);
+    addLine({
+      type: 'info',
+      content: `
+        📚 AVAILABLE CATEGORIES
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        ${available.map(cat => `- ${cat}`).join('\n\t\t')}
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        Use: !category <category_name> to switch.
+        Example: !category default
+        `,
+      timestamp: new Date(),
+    });
+  };
+
+
   const handleSpecialCommand = (cmd: string): boolean => {
-    if (cmd === '!hint') {
-      if (!currentChallenge) {
-        addLine({ type: 'info', content: 'No active challenge. Type !tutorial to start.', timestamp: new Date() });
-        return true;
-      }
+  const available = Object.keys(challengeCategories);
 
-      if (hintIndex >= currentChallenge.hints.length) {
-        addLine({
-          type: 'info',
-          content: `💡 No more hints available. Expected commands: ${currentChallenge.expectedCommands.join(' or ')}`,
-          timestamp: new Date(),
-        });
-      } else {
-        addLine({
-          type: 'info',
-          content: `💡 HINT ${hintIndex + 1}/${currentChallenge.hints.length}: ${currentChallenge.hints[hintIndex]}`,
-          timestamp: new Date(),
-        });
-        setHintIndex(prev => prev + 1);
-      }
-      return true;
-    }
+  // ✅ Show all available categories
+  if (cmd === '!categories') {
+    showCategoryList();
+    return true;
+  }
 
-    if (cmd === '!skip') {
-      if (!currentChallenge) {
-        addLine({ type: 'info', content: 'No active challenge to skip.', timestamp: new Date() });
-        return true;
-      }
+  // ✅ Handle category switching
+  if (cmd.startsWith('!category')) {
+    const parts = cmd.trim().split(' ');
 
-      const next = getNextChallenge(currentChallenge.id);
-      if (next) {
-        addLine({ type: 'info', content: '⏭️  Challenge skipped. Moving to next challenge...', timestamp: new Date() });
-        setCurrentChallenge(next);
-        displayChallenge(next);
-        setStartTime(new Date());
-      } else {
-        addLine({ type: 'success', content: '🎉 You\'ve reached the end of available challenges!', timestamp: new Date() });
-        setCurrentChallenge(null);
-      }
-      return true;
-    }
-
-    if (cmd === '!tutorial') {
-      setCurrentChallenge(builtInChallenges[0]);
-      displayChallenge(builtInChallenges[0]);
-      setStartTime(new Date());
-      return true;
-    }
-
-    if (cmd.startsWith('!man ')) {
-      const cmdName = cmd.substring(5).trim();
-      const result = executeCommand(`man ${cmdName}`, vfs);
-      addLine({
-        type: result.success ? 'output' : 'error',
-        content: result.output,
-        timestamp: new Date(),
-      });
-      return true;
-    }
-
-    if (cmd === '!reset') {
-      window.location.reload();
-      return true;
-    }
-
-    if (cmd === '!stats') {
+    // If no argument provided, show category help
+    if (parts.length === 1) {
       addLine({
         type: 'info',
         content: `
-╔══════════════ OPERATIVE STATS ═════════════════╗
-║ Level: ${userLevel}
-║ Total XP: ${userXP}
-║ Challenges Completed: ${completedChallenges.size}/${builtInChallenges.length}
-║ Commands Executed: ${typingStats.totalCommands}
-║ Average Typing Speed: ${typingStats.speed.toFixed(1)} CPM
-║ Average Accuracy: ${typingStats.accuracy.toFixed(1)}%
-╚════════════════════════════════════════════════╝
-`,
+          📂 CATEGORY COMMAND HELP
+          ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+          Use this command to switch between different sets of challenges.
+
+          Available categories:
+          ${available.map(cat => `- ${cat}`).join('\n')}
+
+          Example:
+          !category basics
+          ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                  `,
         timestamp: new Date(),
       });
       return true;
     }
 
-    return false;
-  };
+    const chosen = parts[1];
+
+    // If invalid category name
+    if (!available.includes(chosen)) {
+      addLine({
+        type: 'error',
+        content: `❌ Unknown category "${chosen}". Try one of: ${available.join(', ')}`,
+        timestamp: new Date(),
+      });
+      return true;
+    }
+
+    // Switch category
+    setCategory(chosen);
+    addLine({
+      type: 'info',
+      content: `📂 Switched to category: ${chosen.toUpperCase()}\nLoading challenges...`,
+      timestamp: new Date(),
+    });
+
+    const selected = getChallengesByCategory(chosen);
+    setChallenges(selected);
+    setCurrentChallenge(selected[0]);
+    displayChallenge(selected[0]);
+    setStartTime(new Date());
+
+    addLine({
+      type: 'info',
+      content: `💡 Type '!hint' for help or '!skip' to move to the next challenge.`,
+      timestamp: new Date(),
+    });
+
+    return true;
+  }
+
+  // ✅ Hint system
+  if (cmd === '!hint') {
+    if (!currentChallenge) {
+      addLine({
+        type: 'info',
+        content: 'No active challenge. Type !tutorial to start.',
+        timestamp: new Date(),
+      });
+      return true;
+    }
+
+    if (hintIndex >= currentChallenge.hints.length) {
+      addLine({
+        type: 'info',
+        content: `💡 No more hints available. Expected commands: ${currentChallenge.expectedCommands.join(' or ')}`,
+        timestamp: new Date(),
+      });
+    } else {
+      addLine({
+        type: 'info',
+        content: `💡 HINT ${hintIndex + 1}/${currentChallenge.hints.length}: ${currentChallenge.hints[hintIndex]}`,
+        timestamp: new Date(),
+      });
+      setHintIndex(prev => prev + 1);
+    }
+    return true;
+  }
+
+  // ✅ Skip challenge
+  if (cmd === '!skip') {
+    if (!currentChallenge) {
+      addLine({
+        type: 'info',
+        content: 'No active challenge to skip.',
+        timestamp: new Date(),
+      });
+      return true;
+    }
+
+    // Find index of current challenge in the current category
+    const currentIndex = challenges.findIndex(c => c.id === currentChallenge.id);
+    const nextChallenge = challenges[currentIndex + 1];
+
+    if (nextChallenge) {
+      addLine({
+        type: 'info',
+        content: '⏭️  Challenge skipped. Moving to next challenge...',
+        timestamp: new Date(),
+      });
+      setCurrentChallenge(nextChallenge);
+      displayChallenge(nextChallenge);
+      setStartTime(new Date());
+    } else {
+      addLine({
+        type: 'success',
+        content: `🎉 You’ve reached the end of available challenges in the [${category.toUpperCase()}] category!`,
+        timestamp: new Date(),
+      });
+      setCurrentChallenge(null);
+    }
+
+    return true;
+  }
+
+
+  // ✅ Start tutorial
+  if (cmd === '!tutorial') {
+    setCurrentChallenge(builtInChallenges[0]);
+    displayChallenge(builtInChallenges[0]);
+    setStartTime(new Date());
+    return true;
+  }
+
+  // ✅ Manual pages
+  if (cmd.startsWith('!man ')) {
+    const cmdName = cmd.substring(5).trim();
+    const result = executeCommand(`man ${cmdName}`, vfs);
+    addLine({
+      type: result.success ? 'output' : 'error',
+      content: result.output,
+      timestamp: new Date(),
+    });
+    return true;
+  }
+
+  // ✅ Reset session
+  if (cmd === '!reset') {
+    window.location.reload();
+    return true;
+  }
+
+  // ✅ Show player stats
+  if (cmd === '!stats') {
+    addLine({
+      type: 'info',
+      content: `
+        ╔══════════════ OPERATIVE STATS ═════════════════╗
+        ║ Level: ${userLevel}
+        ║ Total XP: ${userXP}
+        ║ Challenges Completed: ${completedChallenges.size}/${builtInChallenges.length}
+        ║ Commands Executed: ${typingStats.totalCommands}
+        ║ Avg Typing Speed: ${typingStats.speed.toFixed(1)} CPM
+        ║ Avg Accuracy: ${typingStats.accuracy.toFixed(1)}%
+        ╚════════════════════════════════════════════════╝
+              `,
+      timestamp: new Date(),
+    });
+    return true;
+  }
+
+  // ❌ If no special command matched
+  return false;
+};
+
 
   const calculateTypingSpeed = (command: string, startTime: Date): number => {
     const endTime = new Date();
@@ -202,8 +332,9 @@ Type '!hint' for a hint | Type '!skip' to skip
 
     addLine({
       type: 'input',
-      content: `┌─[user@terminal]─[${vfs.getCurrentPath()}]
-└──╼ $ ${cmd}`,
+      content: `
+        ┌─[user@terminal]─[${vfs.getCurrentPath()}]
+        └──╼ $ ${cmd}`,
       timestamp: new Date(),
     });
 
@@ -257,59 +388,60 @@ Type '!hint' for a hint | Type '!skip' to skip
     }));
 
     if (currentChallenge && result.success) {
-      const isValid = validateCommand(currentChallenge, cmd);
-      if (isValid) {
-        const timeSpent = startTime ? (new Date().getTime() - startTime.getTime()) / 1000 : 0;
-        const earnedXP = currentChallenge.xpReward;
+  const isValid = validateCommand(currentChallenge, cmd);
+  if (isValid) {
+    const timeSpent = startTime ? (new Date().getTime() - startTime.getTime()) / 1000 : 0;
+    const earnedXP = currentChallenge.xpReward;
 
-        addLine({
-          type: 'success',
-          content: `
-✅ CHALLENGE COMPLETED!
-+${earnedXP} XP | Time: ${timeSpent.toFixed(1)}s | Speed: ${typingSpeed.toFixed(0)} CPM
-`,
-          timestamp: new Date(),
-        });
+    addLine({
+      type: 'success',
+      content: `
+        ✅ CHALLENGE COMPLETED!
+        +${earnedXP} XP | Time: ${timeSpent.toFixed(1)}s | Speed: ${typingSpeed.toFixed(0)} CPM
+        `,
+      timestamp: new Date(),
+    });
 
-        setUserXP(prev => {
-          const newXP = prev + earnedXP;
-          const newLevel = Math.floor(newXP / 100) + 1;
-          setUserLevel(newLevel);
-          return newXP;
-        });
+    setUserXP(prev => {
+      const newXP = prev + earnedXP;
+      const newLevel = Math.floor(newXP / 100) + 1;
+      setUserLevel(newLevel);
+      return newXP;
+    });
 
-        setCompletedChallenges(prev => new Set([...Array.from(prev), currentChallenge.id]));
+    setCompletedChallenges(prev => new Set([...Array.from(prev), currentChallenge.id]));
 
-        const next = getNextChallenge(currentChallenge.id);
-        if (next) {
-          setTimeout(() => {
-            setCurrentChallenge(next);
-            displayChallenge(next);
-            setStartTime(new Date());
-          }, 1000);
-        } else {
-          addLine({
-            type: 'success',
-            content: `
-╔═══════════════════════════════════════════════════════════╗
-║                  🏆 MISSION COMPLETE 🏆                   ║
-║                                                           ║
-║  Congratulations, operative! You've completed all        ║
-║  available challenges. You are now a certified           ║
-║  Linux terminal master!                                  ║
-║                                                           ║
-║  Final Stats:                                            ║
-║  - Level: ${userLevel}
-║  - Total XP: ${userXP}
-║  - Challenges: ${completedChallenges.size + 1}/${builtInChallenges.length}
-╚═══════════════════════════════════════════════════════════╝
-`,
-            timestamp: new Date(),
-          });
-          setCurrentChallenge(null);
-        }
-      }
+    // ✅ Find next challenge *within current category*
+    const currentIndex = challenges.findIndex(c => c.id === currentChallenge.id);
+    const nextChallenge = challenges[currentIndex + 1];
+
+    if (nextChallenge) {
+      setTimeout(() => {
+        setCurrentChallenge(nextChallenge);
+        displayChallenge(nextChallenge);
+        setStartTime(new Date());
+      }, 1000);
+    } else {
+      addLine({
+        type: 'success',
+        content: `
+          ╔═══════════════════════════════════════════════════════════╗
+          ║                  🏁 CATEGORY COMPLETE 🏁                   ║
+          ║                                                           ║
+          ║  Congratulations, operative!                              ║
+          ║  You’ve completed all challenges in this category:        ║
+          ║  [ ${category.toUpperCase()} ]                             ║
+          ║                                                           ║
+          ║  Type '!categories' to explore others.                    ║
+          ╚═══════════════════════════════════════════════════════════╝
+          `,
+        timestamp: new Date(),
+      });
+      setCurrentChallenge(null);
     }
+  }
+}
+
 
     setInput('');
     setCommandStartTime(null);
@@ -360,7 +492,7 @@ Type '!hint' for a hint | Type '!skip' to skip
             <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
             <div className="w-3 h-3 rounded-full bg-green-500"></div>
           </div>
-          <span className="text-green-400 text-sm">TERMINAL v0.0.1 - SECURE CONNECTION ESTABLISHED</span>
+          <span className="text-green-400 text-sm">TERMINAL v0.0.1 - [{category.toUpperCase()} MODE]</span>
         </div>
         <div className="flex items-center gap-6 text-xs">
           <div className="flex items-center gap-2">
@@ -388,10 +520,10 @@ Type '!hint' for a hint | Type '!skip' to skip
             key={idx}
             className={`
               ${line.type === 'input' ? 'text-green-300' : ''}
-              ${line.type === 'output' ? 'text-gray-300' : ''}
-              ${line.type === 'error' ? 'text-red-400' : ''}
+              ${line.type === 'output' ? 'text-gray-300 pl-20' : ''}
+              ${line.type === 'error' ? 'text-red-400 pl-20' : ''}
               ${line.type === 'success' ? 'text-green-400 font-bold' : ''}
-              ${line.type === 'info' ? 'text-cyan-400' : ''}
+              ${line.type === 'info' ? 'text-cyan-400 px-20' : ''}
               ${line.type === 'challenge' ? 'text-yellow-400' : ''}
               whitespace-pre-wrap break-words
             `}
@@ -401,7 +533,7 @@ Type '!hint' for a hint | Type '!skip' to skip
         ))}
 
         <div className="flex items-start gap-2 text-green-300">
-          <span className="whitespace-pre">┌─[user@terminal]─[{vfs.getCurrentPath()}]
+          <span className="whitespace-pre pl-20">┌─[user@terminal]─[{vfs.getCurrentPath()}]
 └──╼ $ </span>
           <input
             ref={inputRef}

@@ -1,4 +1,4 @@
-import defaultChallenges from '../challenges/default.json';
+// lib/challenges.ts
 
 export interface Challenge {
   id: string;
@@ -13,20 +13,38 @@ export interface Challenge {
   orderIndex: number;
 }
 
-export const builtInChallenges = defaultChallenges as Challenge[];
+// Import all categories statically (bundled by Next.js)
+import defaultChallenges from '../challenges/default.json';
+import linuxBasics from '../challenges/linux-basics.json';
+import bashScripting from '../challenges/bash-scripting.json';
+import networking from '../challenges/networking.json';
 
-export const getChallengeById = (id: string): Challenge | undefined =>
-  builtInChallenges.find(c => c.id === id);
+// Map of all categories
+export const challengeCategories: Record<string, Challenge[]> = {
+  default: defaultChallenges as Challenge[],
+  'linux-basics': linuxBasics as Challenge[],
+  'bash-scripting': bashScripting as Challenge[],
+  networking: networking as Challenge[],
+};
 
-export const getChallengesByLevel = (level: number): Challenge[] =>
-  builtInChallenges.filter(c => c.level === level);
+// Default export (used for backward compatibility)
+export const builtInChallenges = challengeCategories.default;
 
-export const getNextChallenge = (currentChallengeId: string): Challenge | undefined => {
-  const current = builtInChallenges.find(c => c.id === currentChallengeId);
-  if (!current) return builtInChallenges[0];
+// Utility to get a challenge list by category
+export const getChallengesByCategory = (category: string): Challenge[] =>
+  challengeCategories[category] || builtInChallenges;
 
-  const nextIndex = builtInChallenges.findIndex(c => c.orderIndex > current.orderIndex);
-  return nextIndex >= 0 ? builtInChallenges[nextIndex] : undefined;
+// --- Existing helper functions ---
+export const getChallengeById = (id: string, category: string = 'default'): Challenge | undefined =>
+  getChallengesByCategory(category).find(c => c.id === id);
+
+export const getNextChallenge = (currentChallengeId: string, category: string = 'default'): Challenge | undefined => {
+  const challenges = getChallengesByCategory(category);
+  const current = challenges.find(c => c.id === currentChallengeId);
+  if (!current) return challenges[0];
+
+  const nextIndex = challenges.findIndex(c => c.orderIndex > current.orderIndex);
+  return nextIndex >= 0 ? challenges[nextIndex] : undefined;
 };
 
 export const validateCommand = (challenge: Challenge, command: string): boolean => {

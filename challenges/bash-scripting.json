@@ -1,0 +1,249 @@
+[
+  {
+    "id": "bash-1",
+    "title": "Your First Script",
+    "description": "Create and execute a basic bash script",
+    "difficulty": "beginner",
+    "level": 1,
+    "scenario": "Create your first bash script that prints 'Hello, World!' to the terminal. Make the script executable and run it.",
+    "expectedCommands": ["echo 'Hello, World!'", "chmod +x script.sh", "./script.sh"],
+    "hints": [
+      "Start with shebang: #!/bin/bash",
+      "Use echo to print text",
+      "Make script executable with chmod +x",
+      "Run with ./script.sh"
+    ],
+    "xpReward": 20,
+    "orderIndex": 1
+  },
+  {
+    "id": "bash-2",
+    "title": "Variables Basics",
+    "description": "Learn to declare and use variables",
+    "difficulty": "beginner",
+    "level": 1,
+    "scenario": "Create a script that declares a variable called 'name' with your name, then prints 'Hello, [name]!' using that variable.",
+    "expectedCommands": ["name=\"Your Name\"", "echo \"Hello, $name!\""],
+    "hints": [
+      "Variable assignment: variable=value (no spaces)",
+      "Reference variables with $",
+      "Use double quotes for variable expansion"
+    ],
+    "xpReward": 25,
+    "orderIndex": 2
+  },
+  {
+    "id": "bash-3",
+    "title": "User Input",
+    "description": "Get input from users",
+    "difficulty": "beginner",
+    "level": 2,
+    "scenario": "Create a script that asks for the user's name and then greets them personally.",
+    "expectedCommands": ["read -p \"Enter your name: \" name", "echo \"Hello, $name!\""],
+    "hints": [
+      "Use read command to get input",
+      "-p option allows you to prompt the user",
+      "Store input in a variable"
+    ],
+    "xpReward": 30,
+    "orderIndex": 3
+  },
+  {
+    "id": "bash-4",
+    "title": "Basic Arithmetic",
+    "description": "Perform mathematical operations",
+    "difficulty": "beginner",
+    "level": 2,
+    "scenario": "Create a script that adds two numbers (5 and 3) and displays the result.",
+    "expectedCommands": ["echo $((5 + 3))", "result=$((5 + 3))"],
+    "hints": [
+      "Use $(( )) for arithmetic operations",
+      "You can do: echo $((5 + 3))",
+      "Or store in variable: result=$((5 + 3))"
+    ],
+    "xpReward": 30,
+    "orderIndex": 4
+  },
+  {
+    "id": "bash-5",
+    "title": "If Statements",
+    "description": "Learn conditional logic",
+    "difficulty": "intermediate",
+    "level": 3,
+    "scenario": "Create a script that checks if a number (stored in variable) is greater than 10 and prints an appropriate message.",
+    "expectedCommands": ["if [ $number -gt 10 ]; then", "echo \"Number is greater than 10\"", "fi"],
+    "hints": [
+      "Use if [ condition ]; then",
+      "-gt means greater than",
+      "End with fi",
+      "Remember spaces around brackets"
+    ],
+    "xpReward": 35,
+    "orderIndex": 5
+  },
+  {
+    "id": "bash-6",
+    "title": "For Loops",
+    "description": "Iterate over items",
+    "difficulty": "intermediate",
+    "level": 3,
+    "scenario": "Create a script that uses a for loop to print numbers from 1 to 5.",
+    "expectedCommands": ["for i in 1 2 3 4 5; do", "echo $i", "done"],
+    "hints": [
+      "Syntax: for variable in list; do",
+      "Use echo to print each number",
+      "End with done"
+    ],
+    "xpReward": 35,
+    "orderIndex": 6
+  },
+  {
+    "id": "bash-7",
+    "title": "While Loops",
+    "description": "Loop while condition is true",
+    "difficulty": "intermediate",
+    "level": 3,
+    "scenario": "Create a script that counts from 1 to 5 using a while loop.",
+    "expectedCommands": ["counter=1", "while [ $counter -le 5 ]; do", "echo $counter", "((counter++))", "done"],
+    "hints": [
+      "Initialize counter first",
+      "-le means less than or equal",
+      "Use ((counter++)) to increment",
+      "Don't forget to increment counter"
+    ],
+    "xpReward": 40,
+    "orderIndex": 7
+  },
+  {
+    "id": "bash-8",
+    "title": "Functions",
+    "description": "Create reusable code blocks",
+    "difficulty": "intermediate",
+    "level": 4,
+    "scenario": "Create a function called 'greet' that takes a name as argument and prints 'Hello, [name]!' then call this function.",
+    "expectedCommands": ["greet() {", "echo \"Hello, $1!\"", "}", "greet \"Alice\""],
+    "hints": [
+      "Function syntax: function_name() { commands }",
+      "$1 represents first argument",
+      "Call function with: function_name argument"
+    ],
+    "xpReward": 45,
+    "orderIndex": 8
+  },
+  {
+    "id": "bash-9",
+    "title": "File Existence Check",
+    "description": "Check if files exist",
+    "difficulty": "intermediate",
+    "level": 4,
+    "scenario": "Create a script that checks if a file called 'data.txt' exists in the current directory and prints an appropriate message.",
+    "expectedCommands": ["if [ -f \"data.txt\" ]; then", "echo \"File exists\"", "else", "echo \"File does not exist\"", "fi"],
+    "hints": [
+      "Use -f to check if file exists",
+      "Add else clause for when file doesn't exist",
+      "Remember to quote filename"
+    ],
+    "xpReward": 40,
+    "orderIndex": 9
+  },
+  {
+    "id": "bash-10",
+    "title": "Command Line Arguments",
+    "description": "Handle script arguments",
+    "difficulty": "intermediate",
+    "level": 4,
+    "scenario": "Create a script that takes a filename as command line argument and displays its contents.",
+    "expectedCommands": ["cat \"$1\"", "filename=$1", "cat \"$filename\""],
+    "hints": [
+      "$1 is the first argument",
+      "Always quote variables: \"$1\"",
+      "Use cat to display file contents"
+    ],
+    "xpReward": 45,
+    "orderIndex": 10
+  },
+  {
+    "id": "bash-11",
+    "title": "String Comparison",
+    "description": "Compare strings in conditions",
+    "difficulty": "advanced",
+    "level": 5,
+    "scenario": "Create a script that checks if two strings are equal and prints whether they match or not.",
+    "expectedCommands": ["if [ \"$str1\" = \"$str2\" ]; then", "echo \"Strings are equal\"", "else", "echo \"Strings are different\"", "fi"],
+    "hints": [
+      "Use = for string comparison",
+      "Remember spaces around =",
+      "Quote variables to handle spaces"
+    ],
+    "xpReward": 50,
+    "orderIndex": 11
+  },
+  {
+    "id": "bash-12",
+    "title": "Array Basics",
+    "description": "Work with arrays",
+    "difficulty": "advanced",
+    "level": 5,
+    "scenario": "Create a script that defines an array of fruits and prints each fruit on a new line.",
+    "expectedCommands": ["fruits=(\"apple\" \"banana\" \"orange\")", "for fruit in \"${fruits[@]}\"; do", "echo \"$fruit\"", "done"],
+    "hints": [
+      "Array syntax: array=(item1 item2 item3)",
+      "Use ${array[@]} to get all elements",
+      "Quote \"${fruits[@]}\" to handle spaces"
+    ],
+    "xpReward": 55,
+    "orderIndex": 12
+  },
+  {
+    "id": "bash-13",
+    "title": "Case Statements",
+    "description": "Use switch-like statements",
+    "difficulty": "advanced",
+    "level": 5,
+    "scenario": "Create a script that uses a case statement to handle different menu options (1: List files, 2: Show date, 3: Exit).",
+    "expectedCommands": ["case $option in", "1) ls ;;", "2) date ;;", "3) exit ;;", "*) echo \"Invalid option\" ;;", "esac"],
+    "hints": [
+      "Start with case $variable in",
+      "Each pattern ends with )",
+      "Commands end with ;;",
+      "End with esac",
+      "* ) handles default case"
+    ],
+    "xpReward": 60,
+    "orderIndex": 13
+  },
+  {
+    "id": "bash-14",
+    "title": "File Operations",
+    "description": "Read and process files",
+    "difficulty": "advanced",
+    "level": 6,
+    "scenario": "Create a script that reads a file line by line and prints each line with a line number.",
+    "expectedCommands": ["line_number=1", "while IFS= read -r line; do", "echo \"$line_number: $line\"", "((line_number++))", "done < \"filename\""],
+    "hints": [
+      "Use while IFS= read -r line",
+      "IFS= preserves leading/trailing whitespace",
+      "-r prevents backslash interpretation",
+      "Use < to redirect file input"
+    ],
+    "xpReward": 65,
+    "orderIndex": 14
+  },
+  {
+    "id": "bash-15",
+    "title": "Error Handling",
+    "description": "Handle errors and exit codes",
+    "difficulty": "advanced",
+    "level": 6,
+    "scenario": "Create a script that tries to create a directory and handles the case if it fails (already exists).",
+    "expectedCommands": ["if mkdir \"new_dir\"; then", "echo \"Directory created\"", "else", "echo \"Failed to create directory\"", "exit 1", "fi"],
+    "hints": [
+      "Commands return exit codes (0 = success)",
+      "Use if command; then to check success",
+      "exit 1 indicates error",
+      "mkdir fails if directory exists"
+    ],
+    "xpReward": 70,
+    "orderIndex": 15
+  }
+]
