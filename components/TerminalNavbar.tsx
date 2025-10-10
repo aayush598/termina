@@ -31,7 +31,7 @@ export default function TerminalNavbar({
         {/* Title and Mode */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:gap-2 w-full">
           <span className="text-green-400 text-sm sm:text-base font-semibold leading-tight">
-            TERMINAL v0.0.1 <span>[{category.toUpperCase()} MODE]</span>
+            TERMINA v0.0.1 <span>[{category.toUpperCase()} MODE]</span>
           </span>
         </div>
       </div>

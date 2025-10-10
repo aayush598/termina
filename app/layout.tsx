@@ -5,7 +5,7 @@ import { JetBrains_Mono } from 'next/font/google';
 const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Terminal - Linux Command Learning Platform',
+  title: 'Termina - Linux Command Learning Platform',
   description: 'Learn Linux commands through interactive challenges in a hacker-style terminal interface',
 };
 

@@ -33,6 +33,22 @@
     "orderIndex": 2
   },
   {
+    "id": "docker-1",
+    "title": "Run Your First Container",
+    "description": "Start a simple container",
+    "difficulty": "beginner",
+    "level": 1,
+    "scenario": "Run a simple 'hello-world' Docker container to verify your Docker installation is working properly.",
+    "expectedCommands": ["docker run hello-world"],
+    "hints": [
+      "Use docker run command",
+      "The image name is hello-world",
+      "Docker will automatically pull the image if not available locally"
+    ],
+    "xpReward": 25,
+    "orderIndex": 3
+  },
+  {
     "id": "bash-3",
     "title": "User Input",
     "description": "Get input from users",
@@ -46,7 +62,23 @@
       "Store input in a variable"
     ],
     "xpReward": 30,
-    "orderIndex": 3
+    "orderIndex": 4
+  },
+  {
+    "id": "docker-2",
+    "title": "Run Interactive Container",
+    "description": "Run a container with interactive shell",
+    "difficulty": "beginner",
+    "level": 2,
+    "scenario": "Run an Ubuntu container interactively and access its bash shell to explore the container environment.",
+    "expectedCommands": ["docker run -it ubuntu bash"],
+    "hints": [
+      "Use -it for interactive terminal",
+      "Specify the image (ubuntu) and command (bash)",
+      "You'll get a shell inside the container"
+    ],
+    "xpReward": 30,
+    "orderIndex": 5
   },
   {
     "id": "bash-4",
@@ -62,7 +94,23 @@
       "Or store in variable: result=$((5 + 3))"
     ],
     "xpReward": 30,
-    "orderIndex": 4
+    "orderIndex": 6
+  },
+  {
+    "id": "docker-3",
+    "title": "List Containers",
+    "description": "View running and stopped containers",
+    "difficulty": "beginner",
+    "level": 2,
+    "scenario": "List all Docker containers, including stopped ones, to see what's currently on your system.",
+    "expectedCommands": ["docker ps -a"],
+    "hints": [
+      "Use docker ps for running containers only",
+      "Add -a flag to see all containers",
+      "This shows container ID, image, status, and names"
+    ],
+    "xpReward": 25,
+    "orderIndex": 7
   },
   {
     "id": "bash-5",
@@ -79,7 +127,23 @@
       "Remember spaces around brackets"
     ],
     "xpReward": 35,
-    "orderIndex": 5
+    "orderIndex": 8
+  },
+  {
+    "id": "docker-4",
+    "title": "Port Mapping",
+    "description": "Map container ports to host",
+    "difficulty": "intermediate",
+    "level": 3,
+    "scenario": "Run an Nginx web server container and map its port 80 to port 8080 on your host machine so you can access it via localhost:8080.",
+    "expectedCommands": ["docker run -p 8080:80 nginx"],
+    "hints": [
+      "Use -p flag for port mapping",
+      "Syntax is -p host_port:container_port",
+      "Nginx runs on port 80 by default"
+    ],
+    "xpReward": 35,
+    "orderIndex": 9
   },
   {
     "id": "bash-6",
@@ -95,7 +159,23 @@
       "End with done"
     ],
     "xpReward": 35,
-    "orderIndex": 6
+    "orderIndex": 10
+  },
+  {
+    "id": "docker-5",
+    "title": "Detached Containers",
+    "description": "Run containers in background",
+    "difficulty": "intermediate",
+    "level": 3,
+    "scenario": "Run a Redis server container in detached mode (background) so it continues running after you exit the terminal.",
+    "expectedCommands": ["docker run -d redis"],
+    "hints": [
+      "Use -d flag for detached mode",
+      "Container will run in background",
+      "You'll get back your terminal prompt"
+    ],
+    "xpReward": 30,
+    "orderIndex": 11
   },
   {
     "id": "bash-7",
@@ -112,7 +192,23 @@
       "Don't forget to increment counter"
     ],
     "xpReward": 40,
-    "orderIndex": 7
+    "orderIndex": 12
+  },
+  {
+    "id": "docker-6",
+    "title": "Container Management",
+    "description": "Stop and remove containers",
+    "difficulty": "intermediate",
+    "level": 4,
+    "scenario": "Stop a running container and then remove it to clean up your system.",
+    "expectedCommands": ["docker stop container_name", "docker rm container_name"],
+    "hints": [
+      "Use docker stop to gracefully stop container",
+      "Use docker rm to remove stopped container",
+      "You can use container ID or name"
+    ],
+    "xpReward": 30,
+    "orderIndex": 13
   },
   {
     "id": "bash-8",
@@ -128,7 +224,23 @@
       "Call function with: function_name argument"
     ],
     "xpReward": 45,
-    "orderIndex": 8
+    "orderIndex": 14
+  },
+  {
+    "id": "docker-7",
+    "title": "View Container Logs",
+    "description": "Check container output and logs",
+    "difficulty": "intermediate",
+    "level": 4,
+    "scenario": "Check the logs of a running container to see what it's outputting or debug any issues.",
+    "expectedCommands": ["docker logs container_name"],
+    "hints": [
+      "Use docker logs command",
+      "Add -f flag to follow logs in real-time",
+      "Use container name or ID"
+    ],
+    "xpReward": 25,
+    "orderIndex": 15
   },
   {
     "id": "bash-9",
@@ -144,7 +256,23 @@
       "Remember to quote filename"
     ],
     "xpReward": 40,
-    "orderIndex": 9
+    "orderIndex": 16
+  },
+  {
+    "id": "docker-8",
+    "title": "Execute Commands in Running Container",
+    "description": "Run commands in existing containers",
+    "difficulty": "intermediate",
+    "level": 4,
+    "scenario": "Execute a command inside a running container to check its environment or perform maintenance tasks.",
+    "expectedCommands": ["docker exec container_name ls /app"],
+    "hints": [
+      "Use docker exec command",
+      "Specify container name and the command to run",
+      "Add -it for interactive commands"
+    ],
+    "xpReward": 35,
+    "orderIndex": 17
   },
   {
     "id": "bash-10",
@@ -160,7 +288,23 @@
       "Use cat to display file contents"
     ],
     "xpReward": 45,
-    "orderIndex": 10
+    "orderIndex": 18
+  },
+  {
+    "id": "docker-9",
+    "title": "List Docker Images",
+    "description": "View downloaded images",
+    "difficulty": "beginner",
+    "level": 3,
+    "scenario": "List all Docker images currently downloaded on your system to see what's available for running containers.",
+    "expectedCommands": ["docker images"],
+    "hints": [
+      "Use docker images or docker image ls",
+      "Shows repository, tag, image ID, and size",
+      "Images are templates for containers"
+    ],
+    "xpReward": 20,
+    "orderIndex": 19
   },
   {
     "id": "bash-11",
@@ -176,7 +320,23 @@
       "Quote variables to handle spaces"
     ],
     "xpReward": 50,
-    "orderIndex": 11
+    "orderIndex": 20
+  },
+  {
+    "id": "docker-10",
+    "title": "Remove Docker Images",
+    "description": "Clean up unused images",
+    "difficulty": "intermediate",
+    "level": 5,
+    "scenario": "Remove a Docker image from your system to free up disk space when it's no longer needed.",
+    "expectedCommands": ["docker rmi image_name"],
+    "hints": [
+      "Use docker rmi command",
+      "You need to remove containers using the image first",
+      "Use image ID or repository:tag"
+    ],
+    "xpReward": 30,
+    "orderIndex": 21
   },
   {
     "id": "bash-12",
@@ -192,7 +352,23 @@
       "Quote \"${fruits[@]}\" to handle spaces"
     ],
     "xpReward": 55,
-    "orderIndex": 12
+    "orderIndex": 22
+  },
+  {
+    "id": "docker-11",
+    "title": "Container Inspection",
+    "description": "Get detailed container information",
+    "difficulty": "advanced",
+    "level": 5,
+    "scenario": "Inspect a Docker container to see its detailed configuration, network settings, and mounted volumes.",
+    "expectedCommands": ["docker inspect container_name"],
+    "hints": [
+      "Use docker inspect command",
+      "Output is in JSON format",
+      "Shows all container details and configuration"
+    ],
+    "xpReward": 35,
+    "orderIndex": 23
   },
   {
     "id": "bash-13",
@@ -210,7 +386,23 @@
       "* ) handles default case"
     ],
     "xpReward": 60,
-    "orderIndex": 13
+    "orderIndex": 24
+  },
+  {
+    "id": "docker-12",
+    "title": "Volume Management",
+    "description": "Create and use persistent volumes",
+    "difficulty": "advanced",
+    "level": 6,
+    "scenario": "Create a Docker volume and run a container that uses this volume to persist data even after the container is removed.",
+    "expectedCommands": ["docker volume create my_volume", "docker run -v my_volume:/data ubuntu"],
+    "hints": [
+      "Use docker volume create first",
+      "Mount with -v volume_name:container_path",
+      "Data in /data will persist across container restarts"
+    ],
+    "xpReward": 45,
+    "orderIndex": 25
   },
   {
     "id": "bash-14",
@@ -227,7 +419,23 @@
       "Use < to redirect file input"
     ],
     "xpReward": 65,
-    "orderIndex": 14
+    "orderIndex": 26
+  },
+  {
+    "id": "docker-13",
+    "title": "Docker System Cleanup",
+    "description": "Clean up unused Docker resources",
+    "difficulty": "advanced",
+    "level": 6,
+    "scenario": "Clean up your Docker system by removing all stopped containers, unused networks, and dangling images to free up disk space.",
+    "expectedCommands": ["docker system prune"],
+    "hints": [
+      "Use docker system prune",
+      "Add -a to remove all unused images",
+      "Add -f to force without confirmation"
+    ],
+    "xpReward": 40,
+    "orderIndex": 27
   },
   {
     "id": "bash-15",
@@ -244,6 +452,22 @@
       "mkdir fails if directory exists"
     ],
     "xpReward": 70,
-    "orderIndex": 15
+    "orderIndex": 28
+  },
+  {
+    "id": "docker-14",
+    "title": "Dockerfile Build",
+    "description": "Build custom Docker images",
+    "difficulty": "advanced",
+    "level": 6,
+    "scenario": "Build a custom Docker image from a Dockerfile in the current directory and tag it with a meaningful name.",
+    "expectedCommands": ["docker build -t my-app ."],
+    "hints": [
+      "Use docker build command",
+      "-t flag tags the image with a name"  ,
+      ". specifies current directory as build context"
+    ],
+    "xpReward": 50,
+    "orderIndex": 29
   }
 ]

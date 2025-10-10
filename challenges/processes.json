@@ -1,0 +1,242 @@
+[
+  {
+    "id": "proc-1",
+    "title": "List Running Processes",
+    "description": "Display currently running processes",
+    "difficulty": "beginner",
+    "level": 1,
+    "scenario": "See which processes are currently running on your system.",
+    "expectedCommands": ["ps aux"],
+    "hints": [
+      "Use ps to see process status",
+      "The aux options list all users and full info",
+      "Try typing: ps aux"
+    ],
+    "xpReward": 10,
+    "orderIndex": 1
+  },
+  {
+    "id": "proc-2",
+    "title": "Top Command",
+    "description": "Monitor active processes in real-time",
+    "difficulty": "beginner",
+    "level": 1,
+    "scenario": "Start the top command to see live CPU and memory usage of running processes.",
+    "expectedCommands": ["top"],
+    "hints": [
+      "Use top to see live resource usage",
+      "It continuously updates running processes",
+      "Try typing: top"
+    ],
+    "xpReward": 10,
+    "orderIndex": 2
+  },
+  {
+    "id": "proc-3",
+    "title": "Tree View of Processes",
+    "description": "Display processes in a hierarchical view",
+    "difficulty": "beginner",
+    "level": 1,
+    "scenario": "View the process tree to understand parent-child relationships.",
+    "expectedCommands": ["pstree"],
+    "hints": [
+      "Use pstree to show process tree",
+      "It shows hierarchy of processes",
+      "Try typing: pstree"
+    ],
+    "xpReward": 10,
+    "orderIndex": 3
+  },
+  {
+    "id": "proc-4",
+    "title": "Find Process by Name",
+    "description": "Locate a process using its name",
+    "difficulty": "beginner",
+    "level": 1,
+    "scenario": "Find if the process 'nginx' is running.",
+    "expectedCommands": ["pgrep nginx"],
+    "hints": [
+      "Use pgrep to search processes by name",
+      "It returns the process IDs",
+      "Try typing: pgrep nginx"
+    ],
+    "xpReward": 15,
+    "orderIndex": 4
+  },
+  {
+    "id": "proc-5",
+    "title": "Kill a Process",
+    "description": "Terminate a running process by PID",
+    "difficulty": "intermediate",
+    "level": 2,
+    "scenario": "Stop a process with PID 1234 using the appropriate command.",
+    "expectedCommands": ["kill 1234"],
+    "hints": [
+      "Use kill to terminate processes by PID",
+      "Syntax: kill <PID>",
+      "Try typing: kill 1234"
+    ],
+    "xpReward": 15,
+    "orderIndex": 5
+  },
+  {
+    "id": "proc-6",
+    "title": "Force Kill Process",
+    "description": "Terminate a process forcefully",
+    "difficulty": "intermediate",
+    "level": 2,
+    "scenario": "Forcefully terminate a process with PID 5678.",
+    "expectedCommands": ["kill -9 5678"],
+    "hints": [
+      "Use kill with -9 to force kill",
+      "This sends SIGKILL to the process",
+      "Try typing: kill -9 5678"
+    ],
+    "xpReward": 15,
+    "orderIndex": 6
+  },
+  {
+    "id": "proc-7",
+    "title": "Background Process",
+    "description": "Run a command in the background",
+    "difficulty": "intermediate",
+    "level": 2,
+    "scenario": "Run the sleep command in the background for 60 seconds.",
+    "expectedCommands": ["sleep 60 &"],
+    "hints": [
+      "Use & at the end of the command to run in background",
+      "Syntax: <command> &",
+      "Try typing: sleep 60 &"
+    ],
+    "xpReward": 15,
+    "orderIndex": 7
+  },
+  {
+    "id": "proc-8",
+    "title": "Bring Background Process to Foreground",
+    "description": "Move a background process to foreground",
+    "difficulty": "intermediate",
+    "level": 2,
+    "scenario": "Bring the most recent background process to the foreground.",
+    "expectedCommands": ["fg"],
+    "hints": [
+      "Use fg to bring a background process to foreground",
+      "It resumes the last suspended process",
+      "Try typing: fg"
+    ],
+    "xpReward": 15,
+    "orderIndex": 8
+  },
+  {
+    "id": "proc-9",
+    "title": "Suspend Process",
+    "description": "Suspend a running process",
+    "difficulty": "intermediate",
+    "level": 2,
+    "scenario": "Suspend a running process with Ctrl+Z or using a command.",
+    "expectedCommands": ["kill -STOP 2345"],
+    "hints": [
+      "Use kill with -STOP to suspend",
+      "It stops the process temporarily",
+      "Try typing: kill -STOP 2345"
+    ],
+    "xpReward": 20,
+    "orderIndex": 9
+  },
+  {
+    "id": "proc-10",
+    "title": "Resume Suspended Process",
+    "description": "Resume a previously suspended process",
+    "difficulty": "intermediate",
+    "level": 2,
+    "scenario": "Resume a suspended process with PID 2345.",
+    "expectedCommands": ["kill -CONT 2345"],
+    "hints": [
+      "Use kill with -CONT to continue a stopped process",
+      "Syntax: kill -CONT <PID>",
+      "Try typing: kill -CONT 2345"
+    ],
+    "xpReward": 20,
+    "orderIndex": 10
+  },
+  {
+    "id": "proc-11",
+    "title": "View Process Tree with PID",
+    "description": "Show process tree starting from a specific PID",
+    "difficulty": "intermediate",
+    "level": 3,
+    "scenario": "Display the process tree for PID 1000.",
+    "expectedCommands": ["pstree 1000"],
+    "hints": [
+      "Use pstree with the PID as argument",
+      "Shows hierarchy starting from the PID",
+      "Try typing: pstree 1000"
+    ],
+    "xpReward": 20,
+    "orderIndex": 11
+  },
+  {
+    "id": "proc-12",
+    "title": "Show Process Memory Usage",
+    "description": "Check memory usage of a process",
+    "difficulty": "advanced",
+    "level": 3,
+    "scenario": "Show the memory usage of the process with PID 4321 using pmap.",
+    "expectedCommands": ["pmap 4321"],
+    "hints": [
+      "Use pmap to display memory map of a process",
+      "Syntax: pmap <PID>",
+      "Try typing: pmap 4321"
+    ],
+    "xpReward": 25,
+    "orderIndex": 12
+  },
+  {
+    "id": "proc-13",
+    "title": "Nice Value",
+    "description": "Change the scheduling priority of a process",
+    "difficulty": "advanced",
+    "level": 3,
+    "scenario": "Start a process with lower priority using nice.",
+    "expectedCommands": ["nice -n 10 sleep 100"],
+    "hints": [
+      "Use nice to set process priority",
+      "The -n flag sets the nice value",
+      "Try typing: nice -n 10 sleep 100"
+    ],
+    "xpReward": 25,
+    "orderIndex": 13
+  },
+  {
+    "id": "proc-14",
+    "title": "Renice a Process",
+    "description": "Change the priority of an already running process",
+    "difficulty": "advanced",
+    "level": 3,
+    "scenario": "Increase the nice value of process PID 3456 to 15.",
+    "expectedCommands": ["renice 15 -p 3456"],
+    "hints": [
+      "Use renice to change process priority",
+      "Syntax: renice <value> -p <PID>",
+      "Try typing: renice 15 -p 3456"
+    ],
+    "xpReward": 25,
+    "orderIndex": 14
+  },
+  {
+    "id": "proc-15",
+    "title": "Real-time Process Monitoring",
+    "description": "Use htop for interactive monitoring",
+    "difficulty": "advanced",
+    "level": 4,
+    "scenario": "Start htop to monitor processes interactively.",
+    "expectedCommands": ["htop"],
+    "hints": [
+      "htop provides an interactive process viewer",
+      "It shows CPU, memory, and process tree",
+      "Try typing: htop"
+    ],
+    "xpReward": 30,
+    "orderIndex": 15
+  }
+]

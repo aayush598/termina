@@ -1,0 +1,242 @@
+[
+  {
+    "id": "sysadmin-1",
+    "title": "Check Disk Usage by User",
+    "description": "Find the disk usage of a specific user",
+    "difficulty": "advanced",
+    "level": 5,
+    "scenario": "Check how much disk space the user 'alice' is using.",
+    "expectedCommands": ["du -sh /home/alice"],
+    "hints": [
+      "Use du to check disk usage",
+      "The '-sh' flags show human-readable total",
+      "Try typing: du -sh /home/alice"
+    ],
+    "xpReward": 50,
+    "orderIndex": 1
+  },
+  {
+    "id": "sysadmin-2",
+    "title": "Add New User",
+    "description": "Create a new Linux user",
+    "difficulty": "advanced",
+    "level": 5,
+    "scenario": "Create a new user called 'bob' on the system.",
+    "expectedCommands": ["sudo adduser bob"],
+    "hints": [
+      "Use adduser or useradd to create a user",
+      "You may need sudo privileges",
+      "Try typing: sudo adduser bob"
+    ],
+    "xpReward": 60,
+    "orderIndex": 2
+  },
+  {
+    "id": "sysadmin-3",
+    "title": "Restart Service",
+    "description": "Restart a running service",
+    "difficulty": "advanced",
+    "level": 5,
+    "scenario": "Restart the nginx service using systemctl.",
+    "expectedCommands": ["sudo systemctl restart nginx"],
+    "hints": [
+      "Use systemctl to manage services",
+      "The 'restart' command restarts the service",
+      "Try typing: sudo systemctl restart nginx"
+    ],
+    "xpReward": 70,
+    "orderIndex": 3
+  },
+  {
+    "id": "sysadmin-4",
+    "title": "Enable Service at Boot",
+    "description": "Enable a service to start at boot",
+    "difficulty": "advanced",
+    "level": 5,
+    "scenario": "Ensure the ssh service starts automatically on system boot.",
+    "expectedCommands": ["sudo systemctl enable ssh"],
+    "hints": [
+      "Use systemctl enable to start a service at boot",
+      "The ssh service is commonly called 'ssh'",
+      "Try typing: sudo systemctl enable ssh"
+    ],
+    "xpReward": 60,
+    "orderIndex": 4
+  },
+  {
+    "id": "sysadmin-5",
+    "title": "Disable Service at Boot",
+    "description": "Prevent a service from starting automatically",
+    "difficulty": "advanced",
+    "level": 5,
+    "scenario": "Prevent the apache2 service from starting automatically on boot.",
+    "expectedCommands": ["sudo systemctl disable apache2"],
+    "hints": [
+      "Use systemctl disable to stop a service at boot",
+      "The apache2 service is commonly called 'apache2'",
+      "Try typing: sudo systemctl disable apache2"
+    ],
+    "xpReward": 60,
+    "orderIndex": 5
+  },
+  {
+    "id": "sysadmin-6",
+    "title": "Check Service Status",
+    "description": "Check if a service is active",
+    "difficulty": "advanced",
+    "level": 5,
+    "scenario": "Check the current status of the ssh service.",
+    "expectedCommands": ["systemctl status ssh"],
+    "hints": [
+      "Use systemctl status to see service details",
+      "The ssh service is commonly called 'ssh'",
+      "Try typing: systemctl status ssh"
+    ],
+    "xpReward": 50,
+    "orderIndex": 6
+  },
+  {
+    "id": "sysadmin-7",
+    "title": "List Users",
+    "description": "List all users on the system",
+    "difficulty": "advanced",
+    "level": 5,
+    "scenario": "Display a list of all user accounts on the system.",
+    "expectedCommands": ["cut -d: -f1 /etc/passwd"],
+    "hints": [
+      "Users are stored in /etc/passwd",
+      "Use cut to extract the first field (username)",
+      "Try typing: cut -d: -f1 /etc/passwd"
+    ],
+    "xpReward": 50,
+    "orderIndex": 7
+  },
+  {
+    "id": "sysadmin-8",
+    "title": "Modify File Permissions",
+    "description": "Change permissions of a file",
+    "difficulty": "advanced",
+    "level": 5,
+    "scenario": "Give read, write, and execute permissions to the owner for file.sh.",
+    "expectedCommands": ["chmod 700 file.sh"],
+    "hints": [
+      "Use chmod to change permissions",
+      "700 grants rwx to owner only",
+      "Try typing: chmod 700 file.sh"
+    ],
+    "xpReward": 50,
+    "orderIndex": 8
+  },
+  {
+    "id": "sysadmin-9",
+    "title": "Change File Ownership",
+    "description": "Assign a file to a different user",
+    "difficulty": "advanced",
+    "level": 5,
+    "scenario": "Change the owner of data.txt to user 'alice'.",
+    "expectedCommands": ["sudo chown alice data.txt"],
+    "hints": [
+      "Use chown to change ownership",
+      "You may need sudo privileges",
+      "Try typing: sudo chown alice data.txt"
+    ],
+    "xpReward": 60,
+    "orderIndex": 9
+  },
+  {
+    "id": "sysadmin-10",
+    "title": "Monitor Disk Space",
+    "description": "Check available disk space",
+    "difficulty": "advanced",
+    "level": 5,
+    "scenario": "Display disk usage of all mounted partitions.",
+    "expectedCommands": ["df -h"],
+    "hints": [
+      "Use df to check disk usage",
+      "The '-h' flag makes output human-readable",
+      "Try typing: df -h"
+    ],
+    "xpReward": 50,
+    "orderIndex": 10
+  },
+  {
+    "id": "sysadmin-11",
+    "title": "Lock a User Account",
+    "description": "Prevent a user from logging in",
+    "difficulty": "advanced",
+    "level": 5,
+    "scenario": "Lock the account of user 'bob' to prevent login.",
+    "expectedCommands": ["sudo usermod -L bob"],
+    "hints": [
+      "Use usermod with -L to lock a user",
+      "You need sudo privileges",
+      "Try typing: sudo usermod -L bob"
+    ],
+    "xpReward": 60,
+    "orderIndex": 11
+  },
+  {
+    "id": "sysadmin-12",
+    "title": "Unlock a User Account",
+    "description": "Allow a previously locked user to login",
+    "difficulty": "advanced",
+    "level": 5,
+    "scenario": "Unlock the account of user 'bob'.",
+    "expectedCommands": ["sudo usermod -U bob"],
+    "hints": [
+      "Use usermod with -U to unlock a user",
+      "You need sudo privileges",
+      "Try typing: sudo usermod -U bob"
+    ],
+    "xpReward": 60,
+    "orderIndex": 12
+  },
+  {
+    "id": "sysadmin-13",
+    "title": "View Last Logins",
+    "description": "Check who last logged in",
+    "difficulty": "advanced",
+    "level": 5,
+    "scenario": "Display the last login records of all users.",
+    "expectedCommands": ["last"],
+    "hints": [
+      "Use the last command to see login history",
+      "It shows username, terminal, IP, and login time",
+      "Try typing: last"
+    ],
+    "xpReward": 50,
+    "orderIndex": 13
+  },
+  {
+    "id": "sysadmin-14",
+    "title": "Check Running Processes",
+    "description": "Display all currently running processes",
+    "difficulty": "advanced",
+    "level": 5,
+    "scenario": "List all running processes with detailed information.",
+    "expectedCommands": ["ps aux"],
+    "hints": [
+      "Use ps aux to list all processes",
+      "It shows user, CPU, memory, and command",
+      "Try typing: ps aux"
+    ],
+    "xpReward": 50,
+    "orderIndex": 14
+  },
+  {
+    "id": "sysadmin-15",
+    "title": "Check Memory Usage",
+    "description": "Display system memory usage",
+    "difficulty": "advanced",
+    "level": 5,
+    "scenario": "Check total, used, and free memory on the system.",
+    "expectedCommands": ["free -h"],
+    "hints": [
+      "Use free to check memory",
+      "The '-h' flag gives human-readable output",
+      "Try typing: free -h"
+    ],
+    "xpReward": 50,
+    "orderIndex": 15
+  }
+]

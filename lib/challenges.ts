@@ -15,16 +15,16 @@ export interface Challenge {
 
 // Import all categories statically (bundled by Next.js)
 import defaultChallenges from '../challenges/default.json';
-import linuxBasics from '../challenges/linux-basics.json';
-import bashScripting from '../challenges/bash-scripting.json';
+import docker from '../challenges/docker.json';
 import networking from '../challenges/networking.json';
+import processes from '../challenges/processes.json';
 
 // Map of all categories
 export const challengeCategories: Record<string, Challenge[]> = {
   default: defaultChallenges as Challenge[],
-  'linux-basics': linuxBasics as Challenge[],
-  'bash-scripting': bashScripting as Challenge[],
-  networking: networking as Challenge[],
+  'docker': docker as Challenge[],
+  'processes': processes as Challenge[],
+  'networking': networking as Challenge[],
 };
 
 // Default export (used for backward compatibility)
